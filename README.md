@@ -5,6 +5,8 @@ Install
 -------
 
     npm install
+    sudo npm install -g gulp
+    gulp
 
 Run
 ---
