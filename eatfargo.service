@@ -1,0 +1,15 @@
+[Unit]
+Description=Eat Fargo
+Requires=multi-user.target
+After=multi-user.target
+
+[Service]
+User=nobody
+ExecStart=/usr/bin/node /srv/eatfargo/index.js
+WorkingDirectory=/srv/eatfargo
+Environment=NODE_ENV=production
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
