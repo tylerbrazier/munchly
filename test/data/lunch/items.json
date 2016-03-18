@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Burger",
+    "description": "America's pride food",
+    "price": 3.50,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/9b/YOKOSUKA-NAVY-BURGER-TSUNAMI.JPG"
+  },
+  {
+    "name": "Steak",
+    "description": "Beefy",
+    "price": 5.75,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/60/Grilling_Steaks_%28with_border%29.jpg"
+  }
+]
