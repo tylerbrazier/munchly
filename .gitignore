@@ -5,3 +5,4 @@ npm-debug.log
 /web/resources/css/bootstrap.*
 /web/resources/js/bootstrap.*
 /web/resources/js/jquery.*
+/web/resources/js/*.min.js
