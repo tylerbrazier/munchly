@@ -11,6 +11,7 @@ db.once('open', () => {
   const app = express()
 
   app.use(express.static('web'))
+  app.use('/api', require('./routes/api'))
 
   app.listen(PORT, () => console.log('Listening on %d', PORT))
 })

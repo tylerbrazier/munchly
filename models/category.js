@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Item = require('./item') // needed for population to work
 
-const categorySchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   name: {
     type: String,
     required: 'Name is required',
@@ -8,4 +9,7 @@ const categorySchema = new mongoose.Schema({
   items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }]
 })
 
-module.exports = mongoose.model('Category', categorySchema)
+schema.set('toJSON', { transform: require('./util/transform') })
+
+const Category = mongoose.model('Category', schema)
+module.exports = Category

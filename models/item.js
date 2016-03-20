@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const itemSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   name: {
     type: String,
     required: 'Name is required',
@@ -10,4 +10,7 @@ const itemSchema = new mongoose.Schema({
   image: String,
 })
 
-module.exports = mongoose.model('Item', itemSchema)
+schema.set('toJSON', { transform: require('./util/transform') })
+
+const Item = mongoose.model('Item', schema)
+module.exports = Item
