@@ -4,15 +4,22 @@ Eat Fargo
 Install
 -------
 
+    # as root
+    pacman -S mongodb nodejs npm
+    systemctl start mongodb
+    systemctl enable mongodb
+    npm install -g gulp nodemon
+
+    # in project directory
     npm install
-    sudo npm install -g gulp
     gulp
+    test/insert-test-data.js
 
 Run
 ---
 For development:
 
-    node index.js
+    nodemon index.js
 
 For production, use a service:
 
