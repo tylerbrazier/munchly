@@ -1,25 +1,40 @@
 #!/usr/bin/env node
 'use strict'
 
+const util = require('util')
 const dbtool = require('./dbtool')( {preDrop: true} )
-const categories = require('./data/categories.json')
 
 dbtool.open((err) => {
   if (err)
     return finish(err)
+  const Menu = require('../models/menu')
   const Category = require('../models/category')
   const Item = require('../models/item')
 
+  const menuData = require('./data/menu.json')
+  const categoryData = require('./data/categories.json')
+  const categories = []
+
   Item.create(require('./data/breakfast/items.json'))
-    .then( (items) => Category.create(Object.assign(categories[0],{items})) )
-    .then( (breakfast) => console.log('Breakfast:', breakfast) )
+    .then( (items) => Category.create(Object.assign(categoryData[0],{items})) )
+    .then( (breakfast) => categories.push(breakfast._id) )
 
     .then( () => Item.create(require('./data/lunch/items.json')) )
-    .then( (items) => Category.create(Object.assign(categories[1],{items})) )
-    .then( (lunch) => console.log('Lunch:', lunch) )
+    .then( (items) => Category.create(Object.assign(categoryData[1],{items})) )
+    .then( (lunch) => categories.push(lunch._id))
 
-    .then( () => Category.create(categories[2]) )
-    .then( (snacks) => console.log('Snacks:', snacks) )
+    .then( () => Category.create(categoryData[2]) )
+    .then( (snacks) => categories.push(snacks._id) )
+
+    .then( () => Menu.create(Object.assign(menuData, {categories})) )
+
+    .then( () => {
+      return Menu.findOne()
+        .populate({path:'categories', populate:{path:'items'}})
+        .exec()
+    })
+
+    .then( (result) => util.inspect(result, {depth:null, colors:true}))
 
     .then(finish)
     .catch(finish)
