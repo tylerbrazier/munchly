@@ -6,14 +6,18 @@ $(() => {
   categoriesUl = $('#categories')
   meatDiv = $('#meat')
 
-  populateCategoriesFromAjax()
+  populateMenuFromAjax()
 })
 
-function populateCategoriesFromAjax() {
+function populateMenuFromAjax() {
   $.ajax({
-    url: '/api/categories',
+    url: '/api/menu',
     dataType: 'json',
-    success: appendCategoryListItems,
+    success: (menu) => {
+      $('title').text(menu.name)
+      $('#brand-link').text(menu.name)
+      appendCategoryListItems(menu.categories)
+    },
     error: (jqXHR, textStatus, err) => {
       console.error(jqXHR.responseText)
       alert(jqXHR.responseText)
