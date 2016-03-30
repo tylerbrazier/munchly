@@ -10,5 +10,23 @@
     "description": "Beefy",
     "price": 5.75,
     "image": "https://upload.wikimedia.org/wikipedia/commons/6/60/Grilling_Steaks_%28with_border%29.jpg"
+  },
+  {
+    "name": "French Fries",
+    "description": "Salty sticks from spuds.",
+    "price": 2.00,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Flickr_-_cyclonebill_-_Pommes_frites_med_salatmayonnaise.jpg"
+  },
+  {
+    "name": "Soup",
+    "description": "Eat our soup, it's good.",
+    "price": 1.50,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Vegetable_beef_barley_soup.jpg"
+  },
+  {
+    "name": "Grilled Cheese Sandwich",
+    "description": "Goes well with tomato soup.",
+    "price": 2,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Grilled_cheese_sandwich_on_multi-grain_bread.jpg"
   }
 ]
