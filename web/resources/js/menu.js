@@ -1,12 +1,15 @@
 'use strict'
 
-let categoriesUl, meatDiv
+let categoriesUl, meatDiv, categoriesDiv, brandLink
 
 $(() => {
   categoriesUl = $('#categories')
   meatDiv = $('#meat')
+  categoriesDiv = $('#categories-div')
+  brandLink = $('#brand-link')
 
   populateMenuFromAjax()
+  categoriesDiv.collapse('show')
 })
 
 function populateMenuFromAjax() {
@@ -15,7 +18,7 @@ function populateMenuFromAjax() {
     dataType: 'json',
     success: (menu) => {
       $('title').text(menu.name)
-      $('#brand-link').text(menu.name)
+      brandLink.text(menu.name)
       appendCategoryListItems(menu.categories)
     },
     error: (jqXHR, textStatus, err) => {
@@ -31,6 +34,8 @@ function appendCategoryListItems(jsonData) {
     li.click((event) => {
       event.preventDefault()
       populateMenuItemsFromAjax(c.id)
+      categoriesDiv.collapse('hide')
+      brandLink.text(c.name)
     })
     categoriesUl.append(li)
   })
@@ -58,14 +63,19 @@ function setMenuListItems(jsonData) {
 
 function getMenuItemHtmlTemplate(item) {
   return `\
-  <div class="col-md-4">
+  <div class="col-sm-4 col-md-3">
     <div class="panel panel-default">
       <div class="panel-body">
         <img class="img-responsive" src="${item.image}">
       </div>
       <div class="panel-footer">
-        ${item.name}
+        <div class="item-name">${item.name}</div>
+        <div class="item-description">
+          ${item.description}
+          <span class="item-price">${item.price.toFixed(2)}</span>
+        </div>
       </div>
     </div>
   </div>`
 }
+
