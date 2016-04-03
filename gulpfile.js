@@ -1,49 +1,46 @@
 'use strict'
 const gulp = require('gulp')
-const less = require('gulp-less')
-const replace = require('gulp-replace')
-const rename = require('gulp-rename')
-const cleanCss = require('gulp-clean-css')
 const babel = require('gulp-babel')
+const cleanCss = require('gulp-clean-css')
+const concat = require('gulp-concat')
+const merge = require('merge-stream')
+const rename = require('gulp-rename')
 const uglify = require('gulp-uglify')
+
 const resourcesDir = './web/resources'
 
-gulp.task('default', ['bootstrap:css', 'bootstrap:js', 'jquery', 'menu:js'])
+gulp.task('default', ['css', 'js'])
 
-gulp.task('bootstrap:css', () => {
-  const customVars = `${__dirname}/web/resources/less/variables.less`
-  const oldImport = '@import "variables.less";'
-  const newImport = `@import "${customVars}";`
-  return gulp.src('./node_modules/bootstrap/less/bootstrap.less')
-    .pipe(replace(oldImport, newImport))
-    .pipe(less())
-    .pipe(gulp.dest(`${resourcesDir}/css`))
+gulp.task('css', () => {
+  return gulp.src([
+      './node_modules/bootstrap/dist/css/bootstrap.css',
+      `${resourcesDir}/css/*.css`
+    ])
+    .pipe(concat('all.css'))
+    .pipe(gulp.dest(`${resourcesDir}/css/dist`))
     .pipe(cleanCss())
-    .pipe(rename( (path) => path.basename += '.min' ))
-    .pipe(gulp.dest(`${resourcesDir}/css`))
+    .pipe(rename((path) => path.basename += '.min' ))
+    .pipe(gulp.dest(`${resourcesDir}/css/dist`))
 })
 
-gulp.task('bootstrap:js', () => {
-  return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.*.js')
-    .pipe(gulp.dest(`${resourcesDir}/js`))
-})
-
-gulp.task('jquery', () => {
-  return gulp.src('./node_modules/jquery/dist/*')
-    .pipe(gulp.dest(`${resourcesDir}/js`))
-})
-
-gulp.task('menu:js', () => {
+gulp.task('js', () => {
   // need to handle errors so the watch task doesn't stop
-  let babe = babel({ presets: ['es2015'] })
-  babe.on('error', (err) => { console.error(err.message); babe.end() })
-  return gulp.src(`${resourcesDir}/js/menu.js`)
-    .pipe(babe)
+  const b = babel({ presets: ['es2015'] })
+  b.on('error', (err) => { console.error(err.message); b.end() })
+
+  return merge(
+      gulp.src('./node_modules/jquery/dist/jquery.js'),
+      gulp.src('./node_modules/bootstrap/dist/js/bootstrap.js'),
+      gulp.src(`${resourcesDir}/js/*.js`).pipe(b)
+    )
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest(`${resourcesDir}/js/dist`))
     .pipe(uglify())
-    .pipe(rename( (path) => path.basename += '.min' ))
-    .pipe(gulp.dest(`${resourcesDir}/js`))
+    .pipe(rename((path) => path.basename += '.min' ))
+    .pipe(gulp.dest(`${resourcesDir}/js/dist`))
 })
 
 gulp.task('watch', () => {
-  gulp.watch(`${resourcesDir}/js/menu.js`, ['menu:js'])
+  gulp.watch(`${resourcesDir}/js/*.js`, ['js'])
+  gulp.watch(`${resourcesDir}/css/*.css`, ['css'])
 })

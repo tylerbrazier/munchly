@@ -10,11 +10,11 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^2.0.4",
-    "gulp-less": "^3.0.5",
+    "gulp-concat": "^2.6.0",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
     "gulp-uglify": "^1.5.3",
     "jquery": "^2.2.1",
+    "merge-stream": "^1.0.0",
     "mongoose": "^4.4.7"
   }
 }
