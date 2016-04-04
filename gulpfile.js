@@ -3,7 +3,7 @@ const gulp = require('gulp')
 const babel = require('gulp-babel')
 const cleanCss = require('gulp-clean-css')
 const concat = require('gulp-concat')
-const merge = require('merge-stream')
+const merge = require('merge2')
 const rename = require('gulp-rename')
 const uglify = require('gulp-uglify')
 
