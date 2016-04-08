@@ -1,16 +1,29 @@
 'use strict'
 
-let categoriesUl, meatDiv, categoriesDiv, brandLink
+let categoriesUl, meatDiv, categoriesDiv, brandLink, categoriesButton
 
 $(() => {
   categoriesUl = $('#categories')
   meatDiv = $('#meat')
   categoriesDiv = $('#categories-div')
   brandLink = $('#brand-link')
+  categoriesButton = $('#categories-button')
 
   populateMenuFromAjax()
-  categoriesDiv.collapse('show')
+
+  // when the categories list is toggled, animate the button
+  categoriesDiv.on('hide.bs.collapse show.bs.collapse', () => {
+    categoriesButton.toggleClass('is-active')
+  })
+
+  toggleShowCategories()
 })
+
+function toggleShowCategories() {
+  if(categoriesButton.is(':visible')) {
+    categoriesDiv.collapse('toggle')
+  }
+}
 
 function populateMenuFromAjax() {
   $.ajax({
@@ -30,13 +43,17 @@ function populateMenuFromAjax() {
 
 function appendCategoryListItems(jsonData) {
   jsonData.forEach( (c) => {
-    let li = $(`<li><a href="#">${c.name}</a></li>`)
+    let li = $(`<li><a class="category" href="#">${c.name}</a></li>`)
     li.click((event) => {
       event.preventDefault()
       populateMenuItemsFromAjax(c.id)
-      categoriesDiv.collapse('hide')
-      brandLink.text(c.name)
+      toggleShowCategories()
+
+      // mark it as selected
+      categoriesUl.children().removeClass('selected-category')
+      li.addClass('selected-category')
     })
+
     categoriesUl.append(li)
   })
 }
@@ -64,15 +81,15 @@ function setMenuListItems(jsonData) {
 function getMenuItemHtmlTemplate(item) {
   return `\
   <div class="col-sm-4 col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-body">
+    <div class="panel panel-default item-panel">
+      <div class="panel-body item-panel-body">
         <img class="img-responsive" src="${item.image}">
       </div>
-      <div class="panel-footer">
+      <div class="panel-footer item-panel-footer">
         <div class="item-name">${item.name}</div>
         <div class="item-description">
           ${item.description}
-          <span class="item-price">${item.price.toFixed(2)}</span>
+          <span class="item-price">$${item.price.toFixed(2)}</span>
         </div>
       </div>
     </div>

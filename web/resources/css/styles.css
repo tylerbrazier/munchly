@@ -1,0 +1,52 @@
+body {
+  background-color: #69c;
+  font-family: 'Coming Soon', cursive;
+}
+
+
+.navbar, .navbar-collapse, #categories-button {
+  background-color: #555;
+  border: none;
+  border-radius: 0;
+}
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+  background-color: #ffe;
+}
+#brand-link, .category {
+  color: #ffe !important;
+}
+#brand-link {
+  font-size: x-large;
+  /*these should match the .category margin so it stays vertically centered*/
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.category {
+  text-align: center;
+  font-size: large;
+  margin: 8px;
+}
+.selected-category {
+  background-color: #333;
+}
+
+
+.item-panel, .item-panel-body, .item-panel-footer {
+  border: none;
+  border-radius: 0;
+  background-color: #ccc;
+}
+.item-panel-footer {
+  padding-top: 0;
+}
+.item-name {
+  font-size: large;
+  font-weight: bold;
+  color: #333;
+}
+.item-description, .item-price {
+  font-size: medium;
+}
+.item-price {
+  margin-left: 4px;
+}
