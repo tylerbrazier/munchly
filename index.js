@@ -17,6 +17,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 db.once('open', () => {
   const app = express()
+  app.set('x-powered-by', false)
 
   app.use(express.static('web'))
   app.use('/api', require('./routes/api'))
