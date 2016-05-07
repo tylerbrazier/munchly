@@ -44,7 +44,7 @@ function populateMenuFromAjax() {
 function appendCategoryListItems(jsonData) {
   jsonData.forEach( (c) => {
     let li = $(`<li><a class="category" href="#">${c.name}</a></li>`)
-    li.click((event) => {
+    li.children('a').click((event) => {
       event.preventDefault()
       populateMenuItemsFromAjax(c.id)
       toggleShowCategories()
@@ -72,9 +72,39 @@ function populateMenuItemsFromAjax(categoryId) {
 
 function setMenuListItems(jsonData) {
   meatDiv.empty()
-  jsonData.items.forEach( (i) => {
-    let panel = getMenuItemHtmlTemplate(i)
-    meatDiv.append(panel)
+  jsonData.items.forEach((i) => meatDiv.append(getMenuItemHtmlTemplate(i)))
+  $('.star-rating').rating({
+    min:0, max:5, step:1, size:'sm', theme:'krajee-uni',
+    filledStar: '&#x2605;', emptyStar: '&#x2606;',
+    showClear: false, showCaption: false,
+  })
+  $('a.feedback').click(function(event) {
+    event.preventDefault()
+    let id = $(this).attr('data-item')
+    $(`form.${id}`).slideToggle()
+  })
+  $('form.feedback').on('submit', function(event) {
+    event.preventDefault()
+    let form = $(this)
+    // don't do anything if nothing has been typed
+    if (form.children('textarea').val() == "")
+      return
+    $.ajax({
+      type: 'POST',
+      url: '/api/feedback',
+      data: form.serialize(),
+      success: () => {
+        form.slideToggle(() => {
+          form.empty()
+          form.append('<div class="feedback thanks">Thanks for your feedback!</div>')
+          form.slideToggle()
+        })
+      },
+      error: (jqXHR, textStatus, err) => {
+        console.error(jqXHR.responseText)
+        alert(jqXHR.responseText)
+      }
+    })
   })
 }
 
@@ -82,17 +112,36 @@ function getMenuItemHtmlTemplate(item) {
   return `\
   <div class="col-sm-4 col-md-3">
     <div class="panel panel-default item-panel">
+
       <div class="panel-body item-panel-body">
         <img class="img-responsive" src="${item.image}">
       </div>
+
       <div class="panel-footer item-panel-footer">
-        <div class="item-name">${item.name}</div>
+        <div>
+          <span class="item-name">${item.name}</span>
+          <span class="feedback">
+            <a href="#" data-item="${item.id}" class="feedback">Feedback</a>
+          </span>
+        </div>
+
         <div class="item-description">
           ${item.description}
           <span class="item-price">$${item.price.toFixed(2)}</span>
         </div>
+
+        <form class="form-group feedback ${item.id}"
+              method="post" action="/api/feedback">
+          <textarea placeholder="Feed us back :)"
+                    name="body"
+                    class="form-control feedback"
+                    rows="3"></textarea>
+          <input type="hidden" name="rating" class="star-rating">
+          <input type="hidden" name="item" value="${item.id}">
+          <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+
       </div>
     </div>
   </div>`
 }
-

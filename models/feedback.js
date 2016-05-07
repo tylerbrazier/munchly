@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    min: [1, "Rating can't be less than 1"],
+    min: [0, "Rating can't be negative"],
     max: [5, "Rating can't be greater than 5"],
   },
   item: {

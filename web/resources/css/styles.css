@@ -50,3 +50,19 @@ body {
 .item-price {
   margin-left: 4px;
 }
+
+span.feedback {
+  float: right;
+}
+textarea.feedback {
+  font-family: initial;
+}
+form.feedback {
+  margin-top: 8px;
+  display: none;
+}
+.feedback.thanks {
+  text-align: center;
+  font-family: initial;
+  margin-top: 12px;
+}
