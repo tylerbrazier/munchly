@@ -1,8 +1,9 @@
 'use strict'
+const logger = require('../utils/logger')
 
 module.exports.forJson = (err, req, res, next) => {
 
-  console.error(err)
+  logger.error(err)
 
   setStatus(err, res)
 

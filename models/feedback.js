@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Item = require('./item')
+const logger = require('../utils/logger')
 
 const schema = new mongoose.Schema({
   body: {
@@ -18,7 +19,7 @@ const schema = new mongoose.Schema({
       validator: (value, respond) => {
         Item.findOne({_id: value}, (err, item) => {
           if (err) {
-            console.error(err)
+            logger.error(err)
             return respond(false, `Error looking up item ${value}`)
           } else if (!item)
             return respond(false, `Item ${value} doesn't exist`)
