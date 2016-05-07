@@ -1,33 +1,22 @@
-const logger = {
+const winston = require('winston')
+const moment = require('moment-timezone')
 
-  log: function(level, message) {
-    if (!message) {
-      message = level || ''
-      level = 'info'
-    }
-    switch(level) {
-      case 'error':
-        console.error(level+':', message)
-        break
-      case 'warn':
-        console.warn(level+':', message)
-        break
-      default:
-        console.log(level+':', message)
-    }
-  },
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({
+      timestamp: timestamp,
+    }),
+    new (winston.transports.File)({
+      filename: __dirname + '/../server.log',
+      json: false,
+      timestamp: timestamp,
+    })
+  ]
+});
 
-  error: function(message) {
-    this.log('error', message)
-  },
-
-  info: function(message) {
-    this.log('info', message)
-  },
-
-  warn: function(message) {
-    this.log('warn', message)
-  },
+function timestamp() {
+  return moment().tz('America/Chicago').format()
 }
 
 module.exports = logger
+module.exports.stream = { write: (data) => logger.info(data.trim()) }

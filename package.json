@@ -18,6 +18,9 @@
     "hamburgers": "^0.4.0",
     "jquery": "^2.2.1",
     "merge2": "^1.0.1",
-    "mongoose": "^4.4.7"
+    "moment-timezone": "^0.5.4",
+    "mongoose": "^4.4.7",
+    "morgan": "^1.7.0",
+    "winston": "^2.2.0"
   }
 }

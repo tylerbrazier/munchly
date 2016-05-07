@@ -1,5 +1,5 @@
 node_modules
-npm-debug.log
+*.log
 
 /conf.js*
 /web/resources/css/dist/
