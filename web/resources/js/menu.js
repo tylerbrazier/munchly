@@ -19,6 +19,20 @@ $(() => {
   toggleShowCategories()
 })
 
+function handleAjaxErr(jqXHR, textStatus, err) {
+  console.error(jqXHR)
+  $('#err-container').html(getErrHtmlTemplate(jqXHR.responseText))
+}
+function getErrHtmlTemplate(message) {
+  return `\
+  <div id="err-bubble" class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">
+      <span id="close-err-sign">&times;</span>
+    </button>
+    <strong>Error</strong><br><span>${message}</span>
+  </div>`
+}
+
 function toggleShowCategories() {
   if(categoriesButton.is(':visible')) {
     categoriesDiv.collapse('toggle')
@@ -34,10 +48,7 @@ function populateMenuFromAjax() {
       brandLink.text(menu.name)
       appendCategoryListItems(menu.categories)
     },
-    error: (jqXHR, textStatus, err) => {
-      console.error(jqXHR.responseText)
-      alert(jqXHR.responseText)
-    }
+    error: handleAjaxErr
   })
 }
 
@@ -63,10 +74,7 @@ function populateMenuItemsFromAjax(categoryId) {
     url: `/api/categories/${categoryId}`,
     dataType: 'json',
     success: setMenuListItems,
-    error: (jqXHR, textStatus, err) => {
-      console.error(jqXHR.responseText)
-      alert(jqXHR.responseText)
-    }
+    error: handleAjaxErr
   })
 }
 
@@ -100,10 +108,7 @@ function setMenuListItems(jsonData) {
           form.slideToggle()
         })
       },
-      error: (jqXHR, textStatus, err) => {
-        console.error(jqXHR.responseText)
-        alert(jqXHR.responseText)
-      }
+      error: handleAjaxErr
     })
   })
 }

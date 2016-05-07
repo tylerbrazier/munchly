@@ -4,6 +4,21 @@ body {
 }
 
 
+#err-container {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+  font-family: initial;
+}
+#err-bubble {
+  margin: 8px;
+}
+#close-err-sign {
+  font-size: 28px;
+}
+
+
 .navbar, .navbar-collapse, #categories-button {
   background-color: #555;
   border: none;
