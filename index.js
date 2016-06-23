@@ -3,14 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const logger = require('./utils/logger')
-let conf = require('./.default.conf')
-
-try {
-  conf = Object.assign(conf, require('./conf'))
-} catch (err) {
-  logger.warn('No conf defined; using defaults')
-}
-logger.info(conf)
+const conf = require('./utils/conftool').conf
 
 mongoose.connect(conf.db)
 const db = mongoose.connection
