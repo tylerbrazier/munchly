@@ -4,3 +4,7 @@ node_modules
 /conf.js*
 /web/resources/css/dist/
 /web/resources/js/dist/
+
+/tls/*
+!/tls/dev.key.pem
+!/tls/dev.cert.pem

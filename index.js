@@ -1,4 +1,7 @@
 'use strict'
+const http = require('http')
+const https = require('https')
+const fs = require('fs')
 const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
@@ -18,5 +21,11 @@ db.once('open', () => {
   app.use(express.static('web'))
   app.use('/api', require('./routes/api'))
 
-  app.listen(conf.port, () => logger.info(`Listening on ${conf.port}`))
+  const tlsOpts = {
+    key: fs.readFileSync('tls/' + conf.https.key),
+    cert: fs.readFileSync('tls/' + conf.https.cert),
+  }
+
+  http.createServer(app).listen(conf.http.port)
+  https.createServer(tlsOpts, app).listen(conf.https.port)
 })

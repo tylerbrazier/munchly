@@ -3,9 +3,12 @@ const logger = require('../utils/logger')
 
 module.exports.forJson = (err, req, res, next) => {
 
-  logger.error(err)
-
   setStatus(err, res)
+
+  if (res.statusCode < 500)
+    logger.warn(err.message)
+  else
+    logger.error(err) // will print the stack trace
 
   res.json({ message: getMessage(err) })
 }

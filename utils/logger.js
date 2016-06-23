@@ -12,7 +12,7 @@ const logger = new (winston.Logger)({
       timestamp: timestamp,
     })
   ]
-});
+})
 
 function timestamp() {
   return moment().tz('America/Chicago').format()

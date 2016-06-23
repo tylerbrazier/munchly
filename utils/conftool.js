@@ -6,6 +6,7 @@ try {
 } catch (err) {
   logger.warn('No conf defined; using defaults')
 }
-logger.info(conf)
+
+logger.info('conf=' + JSON.stringify(conf, null, 2))
 
 exports.conf = conf
