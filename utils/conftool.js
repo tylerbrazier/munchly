@@ -2,11 +2,11 @@ const logger = require('./logger')
 
 let conf = require('../.default.conf')
 try {
-  conf = Object.assign(conf, require('../conf'))
+  conf = Object.assign(conf, require('../local/conf'))
 } catch (err) {
   logger.warn('No conf defined; using defaults')
 }
 
-logger.info('conf=' + JSON.stringify(conf, null, 2))
+logger.info('conf = ' + JSON.stringify(conf, null, 2))
 
 exports.conf = conf

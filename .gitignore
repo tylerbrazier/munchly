@@ -1,7 +1,7 @@
 node_modules
-*.log
 
-/conf.js*
+/local/
+
 /web/resources/css/dist/
 /web/resources/js/dist/
 

@@ -18,7 +18,8 @@ function css() {
     './node_modules/bootstrap/dist/css/bootstrap.css',
     './node_modules/bootstrap-star-rating/css/star-rating.css',
     './node_modules/bootstrap-star-rating/css/theme-krajee-uni.css',
-    `${resourcesDir}/css/*.css`
+    `${resourcesDir}/css/*.css`,
+    './local/web/*.css',
   ])
   .pipe(concat('all.css'))
   .pipe(gulp.dest(`${resourcesDir}/css/dist`))

@@ -7,7 +7,7 @@ const logger = new (winston.Logger)({
       timestamp: timestamp,
     }),
     new (winston.transports.File)({
-      filename: __dirname + '/../server.log',
+      filename: __dirname + '/../local/server.log',
       json: false,
       timestamp: timestamp,
     })

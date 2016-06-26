@@ -18,6 +18,7 @@ db.once('open', () => {
   app.set('x-powered-by', false)
 
   app.use(morgan('short', {stream: logger.stream}))
+  app.use(express.static('local/web'))
   app.use(express.static('web'))
   app.use('/api', require('./routes/api'))
 
