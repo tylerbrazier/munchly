@@ -1,11 +1,13 @@
 const bodyParser = require('body-parser')
 const router = require('express').Router()
 const Feedback = require('../models/feedback')
+const secure = require('../middleware/secure')
 
 module.exports = router
 
 router.use(bodyParser.urlencoded({ extended: true }))
 
+router.get('/', secure.https, secure.auth)
 router.get('/', (req, res, next) => {
   Feedback.find((err, feedbacks) => {
     if (err)

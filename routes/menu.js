@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Menu = require('../models/menu')
 const bodyParser = require('body-parser')
+const secure = require('../middleware/secure')
 
 module.exports = router
 
@@ -20,6 +21,7 @@ router.get('/', (req, res, next) => {
     })
 })
 
+router.put('/', secure.https, secure.auth)
 router.put('/', (req, res, next) => {
   Menu.findOne({}, (err, menu) => {
     if (err)

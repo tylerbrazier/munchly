@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Item = require('../models/item')
 const bodyParser = require('body-parser')
+const secure = require('../middleware/secure')
 
 module.exports = router
 
@@ -14,6 +15,7 @@ router.get('/', (req, res, next) => {
   })
 })
 
+router.post('/', secure.https, secure.auth)
 router.post('/', (req, res, next) => {
   Item.create({
     name: req.body.name,
@@ -44,6 +46,7 @@ router.get('/:id', (req, res, next) => {
   res.json(req.item)
 })
 
+router.put('/:id', secure.https, secure.auth)
 router.put('/:id', (req, res, next) => {
   req.item.name = req.body.name
   req.item.description = req.body.description
@@ -56,6 +59,7 @@ router.put('/:id', (req, res, next) => {
   })
 })
 
+router.delete('/:id', secure.https, secure.auth)
 router.delete('/:id', (req, res, next) => {
   req.item.remove((err, item) => {
     if (err)
