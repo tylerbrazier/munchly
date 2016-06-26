@@ -5,7 +5,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: 'Name is required',
   },
-  description: String,
+  description: {
+    type: String,
+    required: 'Description is required',
+  },
   price: Number,
   image: String,
 })

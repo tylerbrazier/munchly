@@ -43,3 +43,23 @@ router.param('id', (req, res, next, id) => {
 router.get('/:id', (req, res, next) => {
   res.json(req.item)
 })
+
+router.put('/:id', (req, res, next) => {
+  req.item.name = req.body.name
+  req.item.description = req.body.description
+  req.item.price = req.body.price
+  req.item.image = req.body.image
+  req.item.save((err, item, nUpdated) => {
+    if (err)
+      return next(err)
+    res.json(item)
+  })
+})
+
+router.delete('/:id', (req, res, next) => {
+  req.item.remove((err, item) => {
+    if (err)
+      return next(err)
+    res.json(item)
+  })
+})
