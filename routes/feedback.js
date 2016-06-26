@@ -6,6 +6,14 @@ module.exports = router
 
 router.use(bodyParser.urlencoded({ extended: true }))
 
+router.get('/', (req, res, next) => {
+  Feedback.find((err, feedbacks) => {
+    if (err)
+      return next(err)
+    res.json(feedbacks)
+  })
+})
+
 router.post('/', (req, res, next) => {
   Feedback.create({
     body: req.body.body,
@@ -17,4 +25,3 @@ router.post('/', (req, res, next) => {
     res.json(feedback)
   })
 })
-
