@@ -22,10 +22,9 @@ router.get('/', (req, res, next) => {
   })
 })
 
-router.post('/', upload.single('file'), (req, res, next) => {
-  res.json({
-    name: req.file.filename,
-    bytes: req.file.size,
-    mimetype: req.file.mimetype,
-  })
+// the argument to upload.array should match the name on the html input
+router.post('/', upload.array('files'), (req, res, next) => {
+  const result = []
+  req.files.forEach(f => result.push({ name: f.filename, bytes: f.size, }))
+  res.json(result)
 })

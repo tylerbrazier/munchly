@@ -6,6 +6,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const logger = require('./utils/logger')
+const secure = require('./middleware/secure')
 const conf = require('./utils/conftool').conf
 
 mongoose.connect(conf.db)
@@ -18,9 +19,10 @@ db.once('open', () => {
   app.set('x-powered-by', false)
 
   app.use(morgan('short', {stream: logger.stream}))
+  app.use('/api', require('./routes/api'))
+  app.use('/admin', secure.https, secure.auth)
   app.use(express.static('local/web'))
   app.use(express.static('web'))
-  app.use('/api', require('./routes/api'))
 
   const tlsOpts = {
     key: fs.readFileSync('tls/' + conf.https.key),

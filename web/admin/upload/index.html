@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>File upload</title>
+  </head>
+  <body>
+    <form id="upload" method="post" action="/api/upload"
+          enctype="multipart/form-data">
+      <p><input type="file" name="files" multiple></p>
+      <p><input type="submit" value="Upload"></p>
+    </form>
+
+    <div id="uploaded">
+      <p>Getting uploaded files...<p>
+      <!--will be populated by ajax-->
+    </div>
+
+    <script src="/resources/js/dist/jquery.min.js"></script>
+    <script src="/resources/js/dist/upload.min.js"></script>
+  </body>
+</html>
