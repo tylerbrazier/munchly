@@ -5,8 +5,8 @@ const fs = require('fs')
 const multer = require('multer')
 const upload = multer({
   storage: multer.diskStorage({
-    destination: (req, file, cb) => cb(null, DIR),
-    filename: (req, file, cb) => cb(null, file.originalname),
+    destination: (req, f, cb) => cb(null, DIR),
+    filename: (req, f, cb) => cb(null, f.originalname.replace(/\W+/gi, '_')),
   })
 })
 
