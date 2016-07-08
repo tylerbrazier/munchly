@@ -1,5 +1,6 @@
 const winston = require('winston')
 const moment = require('moment-timezone')
+const morgan = require('morgan')
 
 const logger = new (winston.Logger)({
   transports: [
@@ -14,9 +15,20 @@ const logger = new (winston.Logger)({
   ]
 })
 
+// returns a middleware function for logging requests
+logger.forRequests = morgan('short', {
+  stream: { write: (data) => logger.info(data.trim()) },
+  skip: shouldSkip,
+})
+
+module.exports = logger
+
+
 function timestamp() {
   return moment().tz('America/Chicago').format()
 }
 
-module.exports = logger
-module.exports.stream = { write: (data) => logger.info(data.trim()) }
+// return true if we should skip logging for this request
+function shouldSkip(req, res) {
+  return req.url.startsWith('/resources') || req.url.startsWith('/favicon.ico')
+}

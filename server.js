@@ -4,7 +4,6 @@ const https = require('https')
 const fs = require('fs')
 const express = require('express')
 const mongoose = require('mongoose')
-const morgan = require('morgan')
 const logger = require('./utils/logger')
 const secure = require('./middleware/secure')
 const conf = require('./utils/conftool').conf
@@ -18,7 +17,7 @@ db.once('open', () => {
   const app = express()
   app.set('x-powered-by', false)
 
-  app.use(morgan('short', {stream: logger.stream}))
+  app.use(logger.forRequests)
   app.use('/api', require('./routes/api'))
   app.use('/admin', secure.https, secure.auth)
   app.use(express.static('local/web'))
