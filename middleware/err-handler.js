@@ -39,7 +39,7 @@ function getMessage(err) {
     let messages = []
     for (var path in err.errors)
       messages.push(err.errors[path].message)
-    return messages.join('\n')
+    return messages.join('; ')
   }
 
   else if (err.message)

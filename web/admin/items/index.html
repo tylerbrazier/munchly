@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Edit menu items</title>
+
+    <link href="/resources/css/dist/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- list of items -->
+        <div class="col-md-6">
+          <p id="items-status">Getting list of items...</p>
+          <input type="button"
+                 id="create"
+                 class="btn btn-success"
+                 value="Create">
+          <ul id="items-list"></ul>
+        </div>
+
+        <!-- form -->
+        <div class="col-md-6">
+          <form id="form" action="/api/items">
+
+            <div class="form-group">
+              <label for="name">Menu item name</label>
+              <input type="text"
+                     id="name"
+                     name="name"
+                     class="form-control"
+                     value="">
+            </div>
+
+            <div class="form-group">
+              <label for="desc">Description</label>
+              <textarea id="description"
+                        name="description"
+                        class="form-control"
+                        rows="4"></textarea>
+
+            </div>
+
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="text"
+                     id="price"
+                     name="price"
+                     class="form-control"
+                     value="">
+            </div>
+
+            <div class="form-group">
+              <label for="item-id">Id</label>
+              <p id="item-id"></p>
+            </div>
+
+            <div style="float:right">
+              <p id="submit-error" style="color:red"></p>
+              <div style="float:right">
+                <input type="submit"
+                       id="submit"
+                       class="btn btn-primary"
+                       value="Save">
+                <input type="button"
+                       id="delete"
+                       class="btn btn-danger"
+                       value="Delete">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <img id="preview" alt="Preview image" src="">
+              <p id="uploaded-status">Getting uploaded files...<p>
+              <div id="uploaded-radios"></div>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="/resources/js/dist/jquery.min.js"></script>
+    <script src="/resources/js/dist/items.min.js"></script>
+  </body>
+</html>
