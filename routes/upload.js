@@ -6,9 +6,13 @@ const multer = require('multer')
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, f, cb) => cb(null, DIR),
-    filename: (req, f, cb) => cb(null, f.originalname.replace(/\W+/gi, '_')),
+    filename: (req, f, cb) => cb(null, sanitizeFileName(f.originalname)),
   })
 })
+
+function sanitizeFileName(f) {
+  return f.replace(/[^A-Za-z0-9_.]/, '_')
+}
 
 module.exports = router
 
