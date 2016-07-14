@@ -1,10 +1,11 @@
 node_modules
+*.log
 
-/local/
+conf.js*
 
-/web/resources/css/dist/
-/web/resources/js/dist/
+# admin uploads
+client/public/local/
 
-/tls/*
-!/tls/dev.key.pem
-!/tls/dev.cert.pem
+# these will be populated by gulp
+client/public/js/
+client/public/css/

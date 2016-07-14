@@ -4,9 +4,8 @@ module.exports = {
   },
   https: {
     port: 8443,
-    // relative to the tls directory
-    key: 'dev.key.pem',
-    cert: 'dev.cert.pem',
+    key: 'tls/key.pem',
+    cert: 'tls/cert.pem',
   },
   admin: {
     user: 'root',

@@ -64,7 +64,7 @@ $(function() {
     return `\
     <div class="radio">
       <label>
-        <input type="radio" class="file-radio" name="image" value="/${name}">
+        <input type="radio" class="file-radio" name="image" value="/local/${name}">
         ${name}
       </label>
     </div>`

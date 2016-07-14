@@ -11,12 +11,11 @@ Install
     npm install -g gulp nodemon
 
     # in project directory
-    ./init.sh
+    npm install
+    gulp
     test/insert-test-data.js
-
-The `local` directory is gitignored and holds things local to a particular
-restaurant including `conf.js[on]`, the server log, and static web content in
-the `local/web` directory such as images and custom css.
+    cp .default.conf.js conf.js
+    vi conf.js  # edit
 
 Run
 ---

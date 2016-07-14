@@ -32,8 +32,8 @@ $(function() {
       $div.empty()
       var $ul = $('<ul></ul>')
       for (var i = 0; i < files.length; i++) {
-        // uploaded files are served at the root level
-        $ul.append($(`<li><a href="/${files[i]}">${files[i]}</a></li>`))
+        // uploaded files are served at /local
+        $ul.append($(`<li><a href="/local/${files[i]}">${files[i]}</a></li>`))
       }
       $div.append($('<p>Uploaded files:</p>'))
       $div.append($ul)
