@@ -1,4 +1,9 @@
 const mongoose = require('mongoose')
+const tool = require('../utils/schematool')
+
+const options = {
+  toJSON: { transform: tool.transform }
+}
 
 const schema = new mongoose.Schema({
   name: {
@@ -11,9 +16,6 @@ const schema = new mongoose.Schema({
   },
   price: Number,
   image: String,
-})
+}, options)
 
-schema.set('toJSON', { transform: require('./util/transform') })
-
-const Item = mongoose.model('Item', schema)
-module.exports = Item
+module.exports = mongoose.model('Item', schema)

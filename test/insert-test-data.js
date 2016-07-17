@@ -7,9 +7,9 @@ const dbtool = require('./dbtool')( {preDrop: true} )
 dbtool.open((err) => {
   if (err)
     return finish(err)
-  const Menu = require('../models/menu')
-  const Category = require('../models/category')
-  const Item = require('../models/item')
+  const Menu = require('../models/Menu')
+  const Category = require('../models/Category')
+  const Item = require('../models/Item')
 
   const menuData = require('./data/menu.json')
   const categoryData = require('./data/categories.json')

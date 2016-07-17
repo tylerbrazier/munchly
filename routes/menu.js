@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Menu = require('../models/menu')
+const Menu = require('../models/Menu')
 const bodyParser = require('body-parser')
 const secure = require('../middleware/secure')
 

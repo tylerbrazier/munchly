@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Item = require('../models/item')
+const Item = require('../models/Item')
 const bodyParser = require('body-parser')
 const secure = require('../middleware/secure')
 

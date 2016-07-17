@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser')
 const router = require('express').Router()
-const Feedback = require('../models/feedback')
+const Feedback = require('../models/Feedback')
 const secure = require('../middleware/secure')
 
 module.exports = router
