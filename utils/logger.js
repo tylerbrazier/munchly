@@ -11,9 +11,11 @@ const skipList = [
 const logger = new (winston.Logger)({
   transports: [
     new (winston.transports.Console)({
+      level: 'debug',
       timestamp: timestamp,
     }),
     new (winston.transports.File)({
+      level: 'debug',
       filename: __dirname + '/../server.log',
       json: false,
       timestamp: timestamp,
