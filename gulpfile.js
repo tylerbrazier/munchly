@@ -14,8 +14,8 @@ gulp.task('default', ['css', 'js'])
 gulp.task('clean', () => del([`${dest}/js`, `${dest}/css`]))
 
 gulp.task('watch', ['css:custom', 'js:custom'], () => {
-  gulp.watch(`${src}/js/*.js`, ['js:custom'])
-  gulp.watch(`${src}/css/*.css`, ['css:custom'])
+  gulp.watch(`${src}/js/**/*.js`, ['js:custom'])
+  gulp.watch(`${src}/css/**/*.css`, ['css:custom'])
 })
 
 
