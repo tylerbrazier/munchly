@@ -16,12 +16,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', secure.https, secure.auth)
-router.post('/', create)
-
-router.put('/', secure.https, secure.auth)
-router.put('/', create)
-
-function create(req, res, next) {
+router.post('/', (req, res, next) => {
   Item.create({
     name: req.body.name,
     description: req.body.description,
@@ -32,7 +27,7 @@ function create(req, res, next) {
       return next(err)
     res.json(item)
   })
-}
+})
 
 router.param('id', (req, res, next, id) => {
   Item.findOne({ _id: id }, (err, item) => {

@@ -18,11 +18,12 @@ $(function() {
     error: onErrorItemsList,
   })
 
-  // submit with ajax to ignore the json response from the API, and use PUT
+  // Submit with ajax to ignore the json response from the API
+  // Also need to use ajax because regular form submit doesn't allow PUT
   $form.on('submit', function(event) {
     event.preventDefault()
     $.ajax({
-      method: 'PUT',
+      method: $form.attr('method'), // may be PUT
       url: $form.attr('action'),
       data: $form.serialize(),
       success: () => location.reload(), // just reload the page
@@ -36,7 +37,7 @@ $(function() {
     var id = $('#item-id').text()
     if (!id) {
       $('#submit-error').text('Nothing to delete')
-    } else if (confirm('Delete?')) {
+    } else if (confirm('Delete this item?')) {
       $.ajax({
         method: 'DELETE',
         url: `/api/items/${id}`,
@@ -93,7 +94,9 @@ $(function() {
     })
   }
 
+  // pass undefined or null to empty the form (create)
   function populateFormFields(item) {
+    $form.attr('method', (item ? 'PUT' : 'POST'))
     // setting .text() and .attr() to undefined doesn't clear them so
     // always use empty strings for missing properties
     var empty = { id:'', name:'', description:'', price:'', image:'' }
