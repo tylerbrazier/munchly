@@ -82,11 +82,23 @@ $(function() {
     $('#items-status').text('Menu items:')
     var $list = $('#items-list')
     sort(items).forEach(i => {
-      var $a = $(`<a href="#">${i.name}</a>`)
-      $a.click(event => { event.preventDefault(); populateFormFields(i) })
+      var $a = $(`<a href="#${i.id}">${i.name}</a>`)
+      $a.click(event => populateFormFields(i))
       $list.append( $('<li>').append($a) )
     })
-  }
+
+    // populate the form with an item if the url anchors to an id of that item
+    var hash = window.location.hash
+    if (hash) {
+      var id = hash.substring(1) // remove leading #
+      for (var i = 0; i < items.length; i++) {
+        if (id == items[i].id) {
+          populateFormFields(items[i])
+          break;
+        }
+      }
+    }
+  } // end populateItemsList
 
   function sort(items) {
     return items.sort((a, b) => {
