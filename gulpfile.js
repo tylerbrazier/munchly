@@ -65,6 +65,7 @@ gulp.task('js', [
   'js:jquery',
   'js:bootstrap',
   'js:stars',
+  'js:sortable',
 ])
 
 gulp.task('js:custom', () => {
@@ -92,5 +93,10 @@ gulp.task('js:bootstrap', () => {
 
 gulp.task('js:stars', () => {
   return gulp.src('./node_modules/bootstrap-star-rating/js/star-rating.min.js')
+    .pipe(gulp.dest(`${dest}/js`))
+})
+
+gulp.task('js:sortable', () => {
+  return gulp.src('./node_modules/html5sortable/dist/html.sortable.min.js')
     .pipe(gulp.dest(`${dest}/js`))
 })

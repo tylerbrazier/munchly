@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Edit categories</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- list of categories -->
+        <div class="col-md-6">
+          <p id="categories-status">Getting list of categories...</p>
+          <input type="button"
+                 id="create"
+                 class="btn btn-success"
+                 value="Create">
+          <ul id="categories-list"></ul>
+        </div>
+
+        <!-- form -->
+        <div class="col-md-6">
+          <form id="form" action="/api/categories" method="POST">
+
+            <div class="form-group">
+              <label for="category-id">Id</label>
+              <p id="category-id"></p>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Category name</label>
+              <input type="text"
+                     id="name"
+                     name="name"
+                     class="form-control"
+                     value="">
+            </div>
+
+            <div style="float:right">
+              <p id="submit-error" style="color:red"></p>
+              <div style="float:right">
+                <input type="submit"
+                       id="submit"
+                       class="btn btn-primary"
+                       value="Save">
+                <input type="button"
+                       id="delete"
+                       class="btn btn-danger"
+                       value="Delete">
+              </div>
+            </div>
+
+            <p id="items-status"></p>
+
+            <div class="form-group">
+              <label for="included-items">Included Menu Items</label>
+              <!-- add padding so <li>s can be dropped in when list is empty -->
+              <ul id="included-items"
+                  class="sortable list-group"
+                  style="padding: 8px">
+              </ul>
+            </div>
+
+            <div class="form-group">
+              <label for="included-items">Available Menu Items</label>
+              <!-- add padding so <li>s can be dropped in when list is empty -->
+              <ul id="available-items"
+                  class="sortable list-group"
+                  style="padding: 8px">
+              </ul>
+            </div>
+
+            <!-- will be updated by js when included/available items change -->
+            <input type="hidden" name="items" value="">
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/html.sortable.min.js"></script>
+    <script src="/js/admin/categories.min.js"></script>
+  </body>
+</html>
