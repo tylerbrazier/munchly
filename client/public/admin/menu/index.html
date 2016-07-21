@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Edit menu</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="container-fluid" style="max-width:600px">
+      <form id="form" action="/api/menu">
+
+        <div class="form-group">
+          <label for="name">Menu name</label>
+          <input type="text"
+                 id="name"
+                 name="name"
+                 class="form-control"
+                 value="">
+        </div>
+
+        <div style="float:right">
+          <p id="submit-error" style="color:red"></p>
+          <div style="float:right">
+            <input type="submit"
+                   id="submit"
+                   class="btn btn-primary"
+                   value="Save">
+          </div>
+        </div>
+
+        <p id="categories-status"></p>
+
+        <div class="form-group">
+          <label for="included-categories">Included Categories</label>
+          <!-- add padding so <li>s can be dropped in when list is empty -->
+          <ul id="included-categories"
+              class="sortable list-group"
+              style="padding: 8px">
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <label for="included-categories">Available Categories</label>
+          <!-- add padding so <li>s can be dropped in when list is empty -->
+          <ul id="available-categories"
+              class="sortable list-group"
+              style="padding: 8px">
+          </ul>
+        </div>
+
+        <a href="/admin/categories"
+           class="btn btn-success">Create new category</a>
+
+        <!-- will be updated by js when included/available cats change -->
+        <input type="hidden" name="categories" value="">
+
+      </form>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/html.sortable.min.js"></script>
+    <script src="/js/admin/menu.min.js"></script>
+  </body>
+</html>
