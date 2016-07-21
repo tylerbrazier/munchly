@@ -79,7 +79,7 @@ $(function() {
   }
 
   function populateItemsList(items) {
-    $('#items-status').text('Menu items:')
+    $('#items-status').text('All menu items:')
     var $list = $('#items-list')
     sort(items).forEach(i => {
       var $a = $(`<a href="#${i.id}">${i.name}</a>`)

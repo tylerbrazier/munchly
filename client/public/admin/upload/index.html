@@ -6,20 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>File upload</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      input {
+        margin: 8px;
+      }
+    </style>
   </head>
   <body>
-    <form id="upload" method="post" action="/api/upload"
-          enctype="multipart/form-data">
-      <p><input type="file" name="files" multiple></p>
-      <p><input type="submit" value="Upload"></p>
-    </form>
 
-    <div id="uploaded">
-      <p>Getting uploaded files...<p>
-      <!--will be populated by ajax-->
+    <div id="nav">
+      <!--will be populated by nav.js-->
+    </div>
+
+    <div class="container-fluid">
+      <form id="upload" method="post" action="/api/upload"
+            enctype="multipart/form-data">
+          <input type="file" name="files" multiple>
+          <input type="submit" class="" value="Upload">
+      </form>
+
+      <div id="uploaded">
+        <p>Getting uploaded files...<p>
+        <!--will be populated by ajax-->
+      </div>
     </div>
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/admin/upload.min.js"></script>
+    <script src="/js/admin/nav.min.js"></script>
   </body>
 </html>

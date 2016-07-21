@@ -12,17 +12,22 @@
   </head>
   <body>
 
+    <div id="nav">
+      <!--will be populated by nav.js-->
+    </div>
+
     <div class="container-fluid">
       <div class="row">
 
         <!-- list of items -->
         <div class="col-md-6">
-          <p id="items-status">Getting list of items...</p>
+          <p id="items-status"
+             style="font-weight:bold">Getting the list of items...</p>
+          <ul id="items-list"></ul>
           <input type="button"
                  id="create"
                  class="btn btn-success"
-                 value="Create">
-          <ul id="items-list"></ul>
+                 value="Create new menu item">
         </div>
 
         <!-- form -->
@@ -79,6 +84,8 @@
               <img id="preview" alt="Preview image" src="">
               <p id="uploaded-status">Getting uploaded files...<p>
               <div id="uploaded-radios"></div>
+              <a href="/admin/upload"
+                 class="btn btn-success">Upload new files</a>
             </div>
 
           </form>
@@ -87,6 +94,7 @@
       </div>
     </div>
 
+    <script src="/js/admin/nav.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/admin/items.min.js"></script>
   </body>

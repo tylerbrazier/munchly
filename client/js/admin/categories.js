@@ -43,7 +43,7 @@ $(function() {
 
 
   function populateCategoriesList(cats) {
-    $('#categories-status').text('Categories:')
+    $('#categories-status').text('All Categories:')
     var $list = $('#categories-list')
     sort(cats).forEach(c => {
       var $a = $(`<a href="#${c.id}">${c.name}</a>`)

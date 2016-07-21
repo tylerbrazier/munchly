@@ -12,17 +12,22 @@
   </head>
   <body>
 
+    <div id="nav">
+      <!--will be populated by nav.js-->
+    </div>
+
     <div class="container-fluid">
       <div class="row">
 
         <!-- list of categories -->
         <div class="col-md-6">
-          <p id="categories-status">Getting list of categories...</p>
+          <p id="categories-status"
+             style="font-weight:bold">Getting the list of categories...</p>
+          <ul id="categories-list"></ul>
           <input type="button"
                  id="create"
                  class="btn btn-success"
-                 value="Create">
-          <ul id="categories-list"></ul>
+                 value="Create new category">
         </div>
 
         <!-- form -->
@@ -77,6 +82,9 @@
               </ul>
             </div>
 
+            <a href="/admin/items"
+               class="btn btn-success">Create new menu item</a>
+
             <!-- will be updated by js when included/available items change -->
             <input type="hidden" name="items" value="">
 
@@ -86,6 +94,7 @@
       </div>
     </div>
 
+    <script src="/js/admin/nav.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/html.sortable.min.js"></script>
     <script src="/js/admin/categories.min.js"></script>
