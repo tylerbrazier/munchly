@@ -6,16 +6,27 @@ const rename = require('gulp-rename')
 const uglify = require('gulp-uglify')
 const del = require('del')
 
-const src  = './client/'
-const dest = './client/public/'
+const src  = './client/src'
+const dest = './client/dist/'
 
-gulp.task('default', ['css', 'js'])
+gulp.task('default', ['html', 'css', 'js'])
 
-gulp.task('clean', () => del([`${dest}/js`, `${dest}/css`]))
+gulp.task('clean', () => del(dest))
 
-gulp.task('watch', ['css:custom', 'js:custom'], () => {
-  gulp.watch(`${src}/js/**/*.js`, ['js:custom'])
-  gulp.watch(`${src}/css/**/*.css`, ['css:custom'])
+gulp.task('watch', ['html:custom', 'css:custom', 'js:custom'], () => {
+  gulp.watch(`${src}/**/*.html`, ['html:custom'])
+  gulp.watch(`${src}/**/*.css`, ['css:custom'])
+  gulp.watch(`${src}/**/*.js`, ['js:custom'])
+})
+
+
+/* html stuff */
+
+gulp.task('html', ['html:custom'])
+
+gulp.task('html:custom', () => {
+  return gulp.src(`${src}/**/*.html`)
+    .pipe(gulp.dest(dest))
 })
 
 
@@ -30,31 +41,31 @@ gulp.task('css', [
 ])
 
 gulp.task('css:custom', () => {
-  return gulp.src(`${src}/css/**/*.css`)
-    .pipe(gulp.dest(`${dest}/css`))
+  return gulp.src(`${src}/**/*.css`)
+    .pipe(gulp.dest(dest))
     .pipe(cleanCss())
     .pipe(rename((path) => path.basename += '.min' ))
-    .pipe(gulp.dest(`${dest}/css`))
+    .pipe(gulp.dest(dest))
 })
 
 gulp.task('css:bootstrap', () => {
   return gulp.src('./node_modules/bootstrap/dist/css/bootstrap.min.css')
-    .pipe(gulp.dest(`${dest}/css`))
+    .pipe(gulp.dest(dest))
 })
 
 gulp.task('css:hamburgers', () => {
   return gulp.src('./node_modules/hamburgers/dist/hamburgers.min.css')
-    .pipe(gulp.dest(`${dest}/css`))
+    .pipe(gulp.dest(dest))
 })
 
 gulp.task('css:stars', () => {
   return gulp.src('./node_modules/bootstrap-star-rating/css/star-rating.min.css')
-    .pipe(gulp.dest(`${dest}/css`))
+    .pipe(gulp.dest(dest))
 })
 
 gulp.task('css:krajee', () => {
   return gulp.src('./node_modules/bootstrap-star-rating/css/theme-krajee-uni.min.css')
-    .pipe(gulp.dest(`${dest}/css`))
+    .pipe(gulp.dest(dest))
 })
 
 
@@ -73,30 +84,30 @@ gulp.task('js:custom', () => {
   const b = babel({ presets: ['es2015'] })
   b.on('error', (err) => { console.error(err.message); b.end() })
 
-  return gulp.src(`${src}/js/**/*.js`)
+  return gulp.src(`${src}/**/*.js`)
     .pipe(b)
-    .pipe(gulp.dest(`${dest}/js`))
+    .pipe(gulp.dest(dest))
     .pipe(uglify())
     .pipe(rename((path) => path.basename += '.min' ))
-    .pipe(gulp.dest(`${dest}/js`))
+    .pipe(gulp.dest(dest))
 })
 
 gulp.task('js:jquery', () => {
   return gulp.src('./node_modules/jquery/dist/jquery.min.js')
-    .pipe(gulp.dest(`${dest}/js`))
+    .pipe(gulp.dest(dest))
 })
 
 gulp.task('js:bootstrap', () => {
   return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.min.js')
-    .pipe(gulp.dest(`${dest}/js`))
+    .pipe(gulp.dest(dest))
 })
 
 gulp.task('js:stars', () => {
   return gulp.src('./node_modules/bootstrap-star-rating/js/star-rating.min.js')
-    .pipe(gulp.dest(`${dest}/js`))
+    .pipe(gulp.dest(dest))
 })
 
 gulp.task('js:sortable', () => {
   return gulp.src('./node_modules/html5sortable/dist/html.sortable.min.js')
-    .pipe(gulp.dest(`${dest}/js`))
+    .pipe(gulp.dest(dest))
 })

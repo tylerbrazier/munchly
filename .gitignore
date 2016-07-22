@@ -1,11 +1,5 @@
 node_modules
 *.log
-
-conf.js*
-
-# admin uploads
-client/public/local/
-
-# these will be populated by gulp
-client/public/js/
-client/public/css/
+/conf.js*
+/client/local/
+/client/dist/

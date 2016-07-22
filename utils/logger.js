@@ -2,10 +2,10 @@ const winston = require('winston')
 const moment = require('moment-timezone')
 const morgan = require('morgan')
 
-// do not log requests with a url that starts with a word in this list
+// do not log requests with a url that matches a pattern in this array
 const skipList = [
-  '/js/',
-  '/css/',
+  /\.js$/,
+  /\.css$/,
 ]
 
 const logger = new (winston.Logger)({
@@ -39,7 +39,7 @@ function timestamp() {
 // return true if we should skip logging for this request
 function shouldSkip(req, res) {
   for (var i in skipList)
-    if (req.url.startsWith(skipList[i]))
+    if (req.url.match(skipList[i]))
       return true
   return false
 }

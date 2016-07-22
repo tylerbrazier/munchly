@@ -20,7 +20,7 @@ db.once('open', () => {
 
   // favicon may not have been uploaded yet
   try {
-    app.use(favicon(__dirname + '/client/local/favicon.ico'))
+    app.use(favicon('client/local/favicon.ico'))
   } catch (err) {
     logger.warn('No favicon')
   }
@@ -28,7 +28,8 @@ db.once('open', () => {
   app.use(logger.forRequests)
   app.use('/api', require('./routes/api'))
   app.use('/admin', secure.https, secure.auth)
-  app.use(express.static('client/public'))
+  app.use('/local', express.static('client/local'))
+  app.use(express.static('client/dist'))
 
   const tlsOpts = {
     key: fs.readFileSync(conf.https.key),

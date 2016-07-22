@@ -1,4 +1,4 @@
-const DIR = __dirname + '/../client/public/local'
+const DIR = __dirname + '/../client/local'
 const router = require('express').Router()
 const secure = require('../middleware/secure')
 const fs = require('fs')
