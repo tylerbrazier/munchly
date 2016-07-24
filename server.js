@@ -18,13 +18,7 @@ db.once('open', () => {
   const app = express()
   app.set('x-powered-by', false)
 
-  // favicon may not have been uploaded yet
-  try {
-    app.use(favicon('client/local/favicon.ico'))
-  } catch (err) {
-    logger.warn('No favicon')
-  }
-
+  app.use(favicon('client/local/favicon.png'))
   app.use(logger.forRequests)
   app.use('/api', require('./routes/api'))
   app.use('/admin', secure.https, secure.auth)

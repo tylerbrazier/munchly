@@ -11,14 +11,6 @@ const upload = multer({
   })
 })
 
-// create the uploads dir if it doesn't exist
-try {
-  fs.mkdirSync(DIR)
-} catch (err) {
-  if (err.code !== 'EEXIST')
-    logger.warn(err)
-}
-
 function sanitizeFileName(f) {
   return f.replace(/[^A-Za-z0-9_.]/, '_')
 }

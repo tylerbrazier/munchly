@@ -5,11 +5,12 @@ const cleanCss = require('gulp-clean-css')
 const rename = require('gulp-rename')
 const uglify = require('gulp-uglify')
 const del = require('del')
+const vfs = require('vinyl-fs')
 
 const src  = './client/src'
 const dest = './client/dist/'
 
-gulp.task('default', ['html', 'css', 'js'])
+gulp.task('default', ['html', 'css', 'js', 'local'])
 
 gulp.task('clean', () => del(dest))
 
@@ -110,4 +111,13 @@ gulp.task('js:stars', () => {
 gulp.task('js:sortable', () => {
   return gulp.src('./node_modules/html5sortable/dist/html.sortable.min.js')
     .pipe(gulp.dest(dest))
+})
+
+
+/* local stuff */
+
+gulp.task('local', () => {
+  // need to use vinyl-fs because gulp doesn't support no-overwrite yet
+  return vfs.src('./client/local_defaults/*')
+    .pipe(vfs.dest('./client/local', { overwrite:false }))
 })
