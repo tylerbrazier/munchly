@@ -28,3 +28,16 @@ router.post('/', (req, res, next) => {
     res.json(feedback)
   })
 })
+
+router.delete('/:id', secure.https, secure.auth)
+router.delete('/:id', (req, res, next) => {
+  Feedback.findByIdAndRemove(req.params.id, (err, feedback) => {
+    if (err)
+      return next(err)
+    if (!feedback) {
+      res.status(404)
+      return next(new Error(`Feedback ${req.params.id} not found`))
+    }
+    res.json(feedback)
+  })
+})
