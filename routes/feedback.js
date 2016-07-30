@@ -2,14 +2,15 @@ const bodyParser = require('body-parser')
 const router = require('express').Router()
 const Feedback = require('../models/Feedback')
 const secure = require('../middleware/secure')
+const sort = require('../middleware/sort')
 
 module.exports = router
 
 router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', secure.https, secure.auth)
-router.get('/', (req, res, next) => {
-  Feedback.find((err, feedbacks) => {
+router.get('/', sort(Feedback, 'item'), (req, res, next) => {
+  Feedback.find().sort(req.sort).exec((err, feedbacks) => {
     if (err)
       return next(err)
     res.json(feedbacks)
