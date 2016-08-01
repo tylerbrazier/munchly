@@ -136,7 +136,7 @@ $(() => {
           <form class="form-group feedback ${item.id}"
                 method="post" action="/api/feedback">
             <textarea placeholder="Feed us back :)"
-                      name="body"
+                      name="comment"
                       class="form-control feedback"
                       rows="3"></textarea>
             <input type="hidden" name="rating" class="star-rating">

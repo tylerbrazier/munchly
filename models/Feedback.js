@@ -8,9 +8,9 @@ const options = {
 }
 
 const schema = new mongoose.Schema({
-  body: {
+  comment: {
     type: String,
-    required: [true, 'Body is required'],
+    required: [true, 'Comment is required'],
   },
   rating: {
     type: Number,

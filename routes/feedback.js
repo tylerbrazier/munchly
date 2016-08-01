@@ -19,7 +19,7 @@ router.get('/', sort(Feedback, 'item'), (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   Feedback.create({
-    body: req.body.body,
+    comment: req.body.comment,
     rating: req.body.rating,
     item: req.body.item,
   }, (err, feedback) => {
