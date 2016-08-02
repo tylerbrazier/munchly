@@ -21,6 +21,9 @@
       <li class="${classFor('/admin/upload/')}">
         <a href="/admin/upload/">Upload</a>
       </li>
+      <li class="${classFor('/admin/feedback/')}">
+        <a href="/admin/feedback/">Feedback</a>
+      </li>
     </ul>
 
   </div>

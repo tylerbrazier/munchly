@@ -10,11 +10,14 @@ router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', secure.https, secure.auth)
 router.get('/', sort(Feedback, 'item'), (req, res, next) => {
-  Feedback.find().sort(req.sort).exec((err, feedbacks) => {
-    if (err)
-      return next(err)
-    res.json(feedbacks)
-  })
+  Feedback.find()
+    .sort(req.sort)
+    .populate('item')
+    .exec((err, feedbacks) => {
+      if (err)
+        return next(err)
+      res.json(feedbacks)
+    })
 })
 
 router.post('/', (req, res, next) => {
