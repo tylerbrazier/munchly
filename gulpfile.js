@@ -6,6 +6,7 @@ const rename = require('gulp-rename')
 const uglify = require('gulp-uglify')
 const del = require('del')
 const vfs = require('vinyl-fs')
+const fileinclude = require('gulp-file-include')
 
 const src  = './client/src'
 const dest = './client/dist/'
@@ -27,6 +28,7 @@ gulp.task('html', ['html:custom'])
 
 gulp.task('html:custom', () => {
   return gulp.src(`${src}/**/*.html`)
+    .pipe(fileinclude({ basepath:'./client/partials', indent:true }))
     .pipe(gulp.dest(dest))
 })
 
