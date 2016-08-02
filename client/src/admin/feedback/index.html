@@ -8,10 +8,7 @@
     <link href="/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-
-    <div id="nav">
-      <!--will be populated by nav.js-->
-    </div>
+    @@include('admin/nav.html', {"page":"feedback"})
 
     <p id="status">Getting feedback...</p>
 
@@ -30,7 +27,6 @@
       </table>
     </div>
 
-    <script src="/admin/nav.min.js"></script>
     <script src="/jquery.min.js"></script>
     <script src="/admin/feedback/feedback.min.js"></script>
   </body>

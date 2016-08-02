@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/admin/">Admin</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li class="@@if(page=='menu'){active}">
+        <a href="/admin/menu/">Menu</a>
+      </li>
+      <li class="@@if(page=='categories'){active}">
+        <a href="/admin/categories/">Categories</a>
+      </li>
+      <li class="@@if(page=='items'){active}">
+        <a href="/admin/items/">Items</a>
+      </li>
+      <li class="@@if(page=='upload'){active}">
+        <a href="/admin/upload/">Upload</a>
+      </li>
+      <li class="@@if(page=='feedback'){active}">
+        <a href="/admin/feedback/">Feedback</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>

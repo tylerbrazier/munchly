@@ -8,10 +8,7 @@
     <link href="/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-
-    <div id="nav">
-      <!--will be populated by nav.js-->
-    </div>
+    @@include('admin/nav.html', {"page":"items"})
 
     <div class="container-fluid">
       <div class="row">
@@ -91,7 +88,6 @@
       </div>
     </div>
 
-    <script src="/admin/nav.min.js"></script>
     <script src="/jquery.min.js"></script>
     <script src="/admin/items/items.min.js"></script>
   </body>

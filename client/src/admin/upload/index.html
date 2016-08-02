@@ -13,10 +13,7 @@
     </style>
   </head>
   <body>
-
-    <div id="nav">
-      <!--will be populated by nav.js-->
-    </div>
+    @@include('admin/nav.html', {"page":"upload"})
 
     <div class="container-fluid">
       <form id="upload" method="post" action="/api/upload"
@@ -33,6 +30,5 @@
 
     <script src="/jquery.min.js"></script>
     <script src="/admin/upload/upload.min.js"></script>
-    <script src="/admin/nav.min.js"></script>
   </body>
 </html>
