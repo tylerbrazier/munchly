@@ -6,7 +6,6 @@ const express = require('express')
 const favicon = require('serve-favicon')
 const mongoose = require('mongoose')
 const logger = require('./utils/logger')
-const secure = require('./middleware/secure')
 const conf = require('./utils/conftool').conf
 
 mongoose.connect(conf.db)
@@ -21,9 +20,9 @@ db.once('open', () => {
   app.use(favicon('client/local/favicon.png'))
   app.use(logger.forRequests)
   app.use('/api', require('./routes/api'))
-  app.use('/admin', secure.https, secure.auth)
+  app.use('/admin', require('./routes/admin'))
   app.use('/local', express.static('client/local'))
-  app.use(express.static('client/dist'))
+  app.use('/', express.static('client/dist'))
 
   const tlsOpts = {
     key: fs.readFileSync(conf.https.key),
