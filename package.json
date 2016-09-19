@@ -20,6 +20,7 @@
     "hamburgers": "^0.4.0",
     "html5sortable": "^0.4.0",
     "jquery": "^2.2.1",
+    "lwip": "0.0.9",
     "moment-timezone": "^0.5.4",
     "mongoose": "^4.4.7",
     "morgan": "^1.7.0",

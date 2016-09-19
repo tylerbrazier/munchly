@@ -1,5 +1,7 @@
 $(function() {
-  var $div = $('#uploaded')
+  var $uploaded = $('#uploaded')
+  var $status = $('#status')
+
   // update the list of uploaded files
   $.ajax({
     url: '/api/upload',
@@ -13,6 +15,7 @@ $(function() {
   // submit using ajax so we can ignore the json response from the API
   function onSubmit(event) {
     event.preventDefault()
+    $status.text('Uploading...')
     var $form = $(this)
     $.ajax({
       method: 'POST',
@@ -27,21 +30,24 @@ $(function() {
 
   function onSuccess(files) {
     if (files.length == 0) {
-      $div.html('<p>No files have been uploaded yet.</p>')
+      $status.text('No files have been uploaded yet.')
     } else {
-      $div.empty()
       var $ul = $('<ul></ul>')
       for (var i = 0; i < files.length; i++) {
         // uploaded files are served at /local
         $ul.append($(`<li><a href="/local/${files[i]}">${files[i]}</a></li>`))
       }
-      $div.append($('<p>Uploaded files:</p>'))
-      $div.append($ul)
+      $status.text('Uploaded files:')
+      $uploaded.html($ul)
     }
   }
 
   function onError(jqXHR, textStatus, err) {
     console.error(jqXHR)
-    $div.html('<p>' + err + '</p>')
+    var message = err
+    if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+      message = jqXHR.responseJSON.message
+    }
+    $status.text(message)
   }
 })

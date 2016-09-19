@@ -21,7 +21,7 @@ db.once('open', () => {
   app.use(logger.forRequests)
   app.use('/api', require('./routes/api'))
   app.use('/admin', require('./routes/admin'))
-  app.use('/local', express.static('client/local'))
+  app.use('/local', express.static('client/local', { dotfiles:'allow' }))
   app.use('/', express.static('client/dist'))
 
   const tlsOpts = {
