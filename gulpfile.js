@@ -11,7 +11,7 @@ const fileinclude = require('gulp-file-include')
 const src  = './client/src'
 const dest = './client/dist/'
 
-gulp.task('default', ['html', 'css', 'js', 'local'])
+gulp.task('default', ['html', 'css', 'js', 'local', 'txt'])
 
 gulp.task('clean', () => del(dest))
 
@@ -122,4 +122,12 @@ gulp.task('local', () => {
   // need to use vinyl-fs because gulp doesn't support no-overwrite yet
   return vfs.src('./client/local_defaults/*')
     .pipe(vfs.dest('./client/local', { overwrite:false }))
+})
+
+
+/* txt */
+
+gulp.task('txt', () => {
+  return gulp.src(`${src}/**/*.txt`)
+    .pipe(gulp.dest(dest))
 })
