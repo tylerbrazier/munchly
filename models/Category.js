@@ -1,3 +1,4 @@
+'use strict'
 const mongoose = require('mongoose')
 const tool = require('../utils/schematool')
 const Item = require('./Item')
