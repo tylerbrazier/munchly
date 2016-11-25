@@ -28,5 +28,8 @@
     "serve-favicon": "^2.3.0",
     "vinyl-fs": "^2.4.3",
     "winston": "^2.2.0"
+  },
+  "scripts": {
+    "gulp": "gulp"
   }
 }

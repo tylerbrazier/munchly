@@ -8,11 +8,10 @@ Install
     pacman -S mongodb nodejs npm
     systemctl start mongodb
     systemctl enable mongodb
-    npm install -g gulp nodemon
 
     # in project directory
     npm install
-    gulp
+    npm run gulp
     test/insert-test-data.js
     cp .default.conf.js conf.js
     vi conf.js  # edit
@@ -21,6 +20,7 @@ Run
 ---
 For development:
 
+    npm install -g nodemon
     nodemon server.js
 
 For production, use a service:
