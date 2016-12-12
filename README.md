@@ -1,5 +1,13 @@
 Eat Fargo
 =========
+Mobile web app for restaurant menus.
+
+Features
+--------
+- pictures for every single menu item
+- allow customer feedback and ratings per item
+- easy to update the menu at `/admin` - no more reprinting menus
+- theme is customizable by uploading a `local.css` file at `/admin/upload`
 
 Install
 -------
