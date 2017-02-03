@@ -9,3 +9,4 @@ TODO
 - figure out a good domain name - rename from eatfargo
 - get an real SSL cert (letsencrypt.org)
 - escape html in template strings
+- consider using jimp (https://www.npmjs.com/package/jimp) instead of lwip
