@@ -4,10 +4,22 @@ Mobile web app for restaurant menus.
 
 Features
 --------
-- pictures for every single menu item
-- allow customer feedback and ratings per item
-- easy to update the menu at `/admin` - no more reprinting menus
-- theme is customizable by uploading a `local.css` file at `/admin/upload`
+- Pictures for every single menu item
+- Allow customer feedback and ratings per item
+- Easy to update the menu at `/admin` - no more reprinting menus
+- Theme is customizable by uploading a `local.css` file at `/admin/upload`
+
+Motivation
+----------
+- Menus should be pictures, not words
+- Menus should be accessible
+- Better interaction between restaurant owners and customers: deals could be
+  offered in exchange for feedback
+- Restaurants can get *private* feedback (unlike Yelp)
+- Feedback is on individual menu items
+- Advertising route via social media sharing
+- Advertising for other local businesses - "Do you have plans after your meal?
+  Here's whats playing at some local cinemas..."
 
 Install
 -------
