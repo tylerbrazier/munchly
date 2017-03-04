@@ -1,4 +1,4 @@
-Eat Fargo
+Munchly
 =========
 Mobile web app for restaurant menus.
 
@@ -46,12 +46,12 @@ For development:
 For production, use a service:
 
     # make edits if needed
-    vi eatfargo.system
+    vi munchly.system
 
     # as root
-    cp eatfargo.system /etc/systemd/system/
-    systemctl start eatfargo.system
-    systemctl enable eatfargo.system
+    cp munchly.system /etc/systemd/system/
+    systemctl start munchly.system
+    systemctl enable munchly.system
 
     # make sure it's working
-    systemctl status eatfargo.system
+    systemctl status munchly.system

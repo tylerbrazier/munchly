@@ -1,12 +1,12 @@
 [Unit]
-Description=Eat Fargo
+Description=Munchly
 Requires=multi-user.target
 After=multi-user.target
 
 [Service]
 User=nobody
-ExecStart=/usr/bin/node /srv/eatfargo/server.js
-WorkingDirectory=/srv/eatfargo
+ExecStart=/usr/bin/node /srv/munchly/server.js
+WorkingDirectory=/srv/munchly
 Environment=NODE_ENV=production
 Restart=always
 RestartSec=5
