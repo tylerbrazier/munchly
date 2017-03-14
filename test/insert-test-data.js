@@ -1,19 +1,19 @@
 #!/usr/bin/env node
-'use strict'
+'use strict';
 
-const util = require('util')
-const dbtool = require('./dbtool')( {preDrop: true} )
+const util = require('util');
+const dbtool = require('./dbtool')( {preDrop: true} );
 
 dbtool.open((err) => {
   if (err)
-    return finish(err)
-  const Menu = require('../models/Menu')
-  const Category = require('../models/Category')
-  const Item = require('../models/Item')
+    return finish(err);
+  const Menu = require('../models/Menu');
+  const Category = require('../models/Category');
+  const Item = require('../models/Item');
 
-  const menuData = require('./data/menu.json')
-  const categoryData = require('./data/categories.json')
-  const categories = []
+  const menuData = require('./data/menu.json');
+  const categoryData = require('./data/categories.json');
+  const categories = [];
 
   Item.create(require('./data/breakfast/items.json'))
     .then( (items) => Category.create(Object.assign(categoryData[0],{items})) )
@@ -31,17 +31,17 @@ dbtool.open((err) => {
     .then( () => {
       return Menu.findOne()
         .populate({path:'categories', populate:{path:'items'}})
-        .exec()
+        .exec();
     })
 
     .then( (result) => util.inspect(result, {depth:null, colors:true}))
 
     .then(finish)
-    .catch(finish)
-})
+    .catch(finish);
+});
 
 function finish(err) {
   if (err)
-    console.error(err)
-  dbtool.close((err) => { if (err) console.error(err) })
+    console.error(err);
+  dbtool.close((err) => { if (err) console.error(err); });
 }

@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-const tool = require('../utils/schematool')
+const mongoose = require('mongoose');
+const tool = require('../utils/schematool');
 
 const options = {
   toJSON: { transform: tool.transform }
-}
+};
 
 const schema = new mongoose.Schema({
   name: {
@@ -19,6 +19,6 @@ const schema = new mongoose.Schema({
     required: 'Nothing is free',
   },
   image: String,
-}, options)
+}, options);
 
-module.exports = mongoose.model('Item', schema)
+module.exports = mongoose.model('Item', schema);

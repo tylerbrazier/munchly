@@ -1,11 +1,11 @@
-const mongoose = require('mongoose')
-const Item = require('./Item')
-const tool = require('../utils/schematool')
+const mongoose = require('mongoose');
+const Item = require('./Item');
+const tool = require('../utils/schematool');
 
 const options = {
   toJSON: { transform: tool.transform },
   collection: 'feedback', // Don't let mongoose pluralize the collection name
-}
+};
 
 const schema = new mongoose.Schema({
   comment: {
@@ -22,6 +22,6 @@ const schema = new mongoose.Schema({
     ref: 'Item',
     validate: { validator: tool.validator(Item) },
   },
-}, options)
+}, options);
 
-module.exports = mongoose.model('Feedback', schema)
+module.exports = mongoose.model('Feedback', schema);

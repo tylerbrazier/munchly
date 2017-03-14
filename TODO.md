@@ -1,6 +1,5 @@
 TODO
 ====
-- eslint
 - don't require a description for menu items (e.g. fries) and account for this
   in the ui
 - nice 404 page

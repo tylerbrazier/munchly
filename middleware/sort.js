@@ -15,56 +15,56 @@
 // defaultField is used when no ?sort query param is given.
 // defaultOrder is asc
 
-const defaultOrder = 'asc'
+const defaultOrder = 'asc';
 
 // model and defaultField are required
 module.exports = function(model, defaultField) {
 
-  var allowedFields = getFields(model)
+  var allowedFields = getFields(model);
 
   // sanity check
   if (!isIncluded(defaultField, allowedFields))
-    throw mkError(defaultField, allowedFields)
+    throw mkError(defaultField, allowedFields);
 
   return function(req, res, next) {
-    var field = req.query.sort || defaultField
-    var order = req.query.order || defaultOrder
+    var field = req.query.sort || defaultField;
+    var order = req.query.order || defaultOrder;
 
     // validate sort field
     if (!isIncluded(field, allowedFields)) {
-      res.statusCode = 400
-      return next(mkError(field, allowedFields))
+      res.statusCode = 400;
+      return next(mkError(field, allowedFields));
     }
 
     // validate order
     if (order !== 'asc' && order !== 'desc') {
-      res.statusCode = 400
-      return next(new Error("order must be either 'asc' or 'desc'"))
+      res.statusCode = 400;
+      return next(new Error("order must be either 'asc' or 'desc'"));
     }
 
-    req.sort = (order == 'desc' ? '-' : '') + (field == 'id' ? '_id' : field)
-    next()
-  }
+    req.sort = (order == 'desc' ? '-' : '') + (field == 'id' ? '_id' : field);
+    next();
+  };
 
-}
+};
 
 function getFields(model) {
-  var result = ['id']
+  var result = ['id'];
   model.schema.eachPath(p => {
     if (p != '_id' && p != '__v')
-      result.push(p)
-  })
-  return result
+      result.push(p);
+  });
+  return result;
 }
 
 // use this instead of indexOf because we have to handle the id to _id problem
 function isIncluded(field, allowedFields) {
   if (field === 'id')
-    return true
+    return true;
   else
-    return (allowedFields.indexOf(field) >= 0)
+    return (allowedFields.indexOf(field) >= 0);
 }
 
 function mkError(field, allowedFields) {
-  return new Error(`Sort error: '${field}' is not one of [${allowedFields}]`)
+  return new Error(`Sort error: '${field}' is not one of [${allowedFields}]`);
 }

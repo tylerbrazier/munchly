@@ -30,6 +30,11 @@
     "winston": "^2.2.0"
   },
   "scripts": {
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "eslint-config-tylerbrazier": "0.0.5"
   }
 }

@@ -1,25 +1,25 @@
 $(() => {
-  'use strict'
-  let categoriesUl, meatDiv, categoriesDiv, brandLink, categoriesButton
+  'use strict';
+  let categoriesUl, meatDiv, categoriesDiv, brandLink, categoriesButton;
 
-  categoriesUl = $('#categories')
-  meatDiv = $('#meat')
-  categoriesDiv = $('#categories-div')
-  brandLink = $('#brand-link')
-  categoriesButton = $('#categories-button')
+  categoriesUl = $('#categories');
+  meatDiv = $('#meat');
+  categoriesDiv = $('#categories-div');
+  brandLink = $('#brand-link');
+  categoriesButton = $('#categories-button');
 
-  populateMenuFromAjax()
+  populateMenuFromAjax();
 
   // when the categories list is toggled, animate the button
   categoriesDiv.on('hide.bs.collapse show.bs.collapse', () => {
-    categoriesButton.toggleClass('is-active')
-  })
+    categoriesButton.toggleClass('is-active');
+  });
 
-  toggleShowCategories()
+  toggleShowCategories();
 
   function handleAjaxErr(jqXHR, textStatus, err) {
-    console.error(jqXHR)
-    $('#err-container').html(getErrHtmlTemplate(jqXHR.responseText))
+    console.error(jqXHR);
+    $('#err-container').html(getErrHtmlTemplate(jqXHR.responseText));
   }
   function getErrHtmlTemplate(message) {
     return `\
@@ -28,12 +28,12 @@ $(() => {
         <span id="close-err-sign">&times;</span>
       </button>
       <strong>Error</strong><br><span>${message}</span>
-    </div>`
+    </div>`;
   }
 
   function toggleShowCategories() {
     if(categoriesButton.is(':visible')) {
-      categoriesDiv.collapse('toggle')
+      categoriesDiv.collapse('toggle');
     }
   }
 
@@ -42,29 +42,29 @@ $(() => {
       url: '/api/menu',
       dataType: 'json',
       success: (menu) => {
-        $('title').text(menu.name)
-        brandLink.text(menu.name)
-        appendCategoryListItems(menu.categories)
+        $('title').text(menu.name);
+        brandLink.text(menu.name);
+        appendCategoryListItems(menu.categories);
       },
       error: handleAjaxErr
-    })
+    });
   }
 
   function appendCategoryListItems(jsonData) {
     jsonData.forEach( (c) => {
-      let li = $(`<li><a class="category" href="#">${c.name}</a></li>`)
+      let li = $(`<li><a class="category" href="#">${c.name}</a></li>`);
       li.children('a').click((event) => {
-        event.preventDefault()
-        populateMenuItemsFromAjax(c.id)
-        toggleShowCategories()
+        event.preventDefault();
+        populateMenuItemsFromAjax(c.id);
+        toggleShowCategories();
 
         // mark it as selected
-        categoriesUl.children().removeClass('selected-category')
-        li.addClass('selected-category')
-      })
+        categoriesUl.children().removeClass('selected-category');
+        li.addClass('selected-category');
+      });
 
-      categoriesUl.append(li)
-    })
+      categoriesUl.append(li);
+    });
   }
 
   function populateMenuItemsFromAjax(categoryId) {
@@ -73,42 +73,42 @@ $(() => {
       dataType: 'json',
       success: setMenuListItems,
       error: handleAjaxErr
-    })
+    });
   }
 
   function setMenuListItems(jsonData) {
-    meatDiv.empty()
-    jsonData.items.forEach((i) => meatDiv.append(getMenuItemHtmlTemplate(i)))
+    meatDiv.empty();
+    jsonData.items.forEach((i) => meatDiv.append(getMenuItemHtmlTemplate(i)));
     $('.star-rating').rating({
       min:0, max:5, step:1, size:'sm', theme:'krajee-uni',
       filledStar: '&#x2605;', emptyStar: '&#x2606;',
       showClear: false, showCaption: false,
-    })
+    });
     $('a.feedback').click(function(event) {
-      event.preventDefault()
-      let id = $(this).attr('data-item')
-      $(`form.${id}`).slideToggle()
-    })
+      event.preventDefault();
+      let id = $(this).attr('data-item');
+      $(`form.${id}`).slideToggle();
+    });
     $('form.feedback').on('submit', function(event) {
-      event.preventDefault()
-      let form = $(this)
+      event.preventDefault();
+      let form = $(this);
       // don't do anything if nothing has been typed
       if (form.children('textarea').val() == "")
-        return
+        return;
       $.ajax({
         type: 'POST',
         url: '/api/feedback',
         data: form.serialize(),
         success: () => {
           form.slideToggle(() => {
-            form.empty()
-            form.append('<div class="feedback thanks">Thanks for your feedback!</div>')
-            form.slideToggle()
-          })
+            form.empty();
+            form.append('<div class="feedback thanks">Thanks for your feedback!</div>');
+            form.slideToggle();
+          });
         },
         error: handleAjaxErr
-      })
-    })
+      });
+    });
   }
 
   function getMenuItemHtmlTemplate(item) {
@@ -146,6 +146,6 @@ $(() => {
 
         </div>
       </div>
-    </div>`
+    </div>`;
   }
-})
+});

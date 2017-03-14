@@ -1,12 +1,13 @@
-const winston = require('winston')
-const moment = require('moment-timezone')
-const morgan = require('morgan')
+const winston = require('winston');
+const moment = require('moment-timezone');
+const morgan = require('morgan');
+
 
 // do not log requests with a url that matches a pattern in this array
 const skipList = [
   /\.js$/,
   /\.css$/,
-]
+];
 
 const logger = new (winston.Logger)({
   transports: [
@@ -21,25 +22,25 @@ const logger = new (winston.Logger)({
       timestamp: timestamp,
     })
   ]
-})
+});
 
 // returns a middleware function for logging requests
 logger.forRequests = morgan('short', {
   stream: { write: (data) => logger.info(data.trim()) },
   skip: shouldSkip,
-})
+});
 
-module.exports = logger
+module.exports = logger;
 
 
 function timestamp() {
-  return moment().tz('America/Chicago').format()
+  return moment().tz('America/Chicago').format();
 }
 
 // return true if we should skip logging for this request
 function shouldSkip(req, res) {
   for (var i in skipList)
     if (req.url.match(skipList[i]))
-      return true
-  return false
+      return true;
+  return false;
 }
