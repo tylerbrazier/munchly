@@ -55,3 +55,17 @@ For production, use a service:
 
     # make sure it's working
     systemctl status munchly.system
+
+TODO (in no particular order)
+----
+- use postgresql instead of mongo; relational db is better suited for this app
+- don't require a description for menu items (e.g. fries) and account for this
+  in the ui
+- nice 404 page
+- allow `priceFormat()` or something to be defined in `local.js`; some
+  restaurants may not want dollar signs.
+- get an real SSL cert (letsencrypt.org)
+- escape html in template strings
+- consider server side rendering with ejs (or something similar)
+- consider using browserify
+- consider using jimp (https://www.npmjs.com/package/jimp) instead of lwip
